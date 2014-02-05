@@ -3,14 +3,115 @@
   <head>
     <meta charset="UTF-8">
     <title>
-      Main repo
+      Test
     </title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
     </head>
   <body>
-    <a href="/">Main repo</a> .....
-    Version 2 .....
-    Version 3 .....
-    Version 4 .....
-    Version 5 bla
+
+
+
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/mousewheel.js"></script>
+    <script src="js/three.min.js"></script>
+
+    <script>
+
+
+        var camera, scene, renderer;
+        var geometry, material, mesh;
+
+        init();
+        animate();
+
+        function init() {
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+            camera.position.z = 1000;
+
+            scene = new THREE.Scene();
+
+            //geometry = new THREE.CubeGeometry(200, 200, 200);
+
+            geometry = new THREE.OctahedronGeometry(400, 2);
+            material = new THREE.MeshBasicMaterial({
+                color: '#F2A6B7',
+                wireframe: true,
+                wireframeLinewidth:2
+
+            });
+
+            mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            renderer = new THREE.CanvasRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            document.body.appendChild(renderer.domElement);
+
+        }
+
+        function animate() {
+
+            // note: three.js includes requestAnimationFrame shim
+            requestAnimationFrame(animate);
+
+            //mesh.rotation.x += 0.05;
+            //mesh.rotation.y += 0.05;
+            mesh.rotation.z += 0.05;
+            //mesh.position.z += 1;
+
+            renderer.render(scene, camera);
+
+        }
+
+        $(window).load(function(){
+            $('canvas').eq(0).attr('id','object');
+
+            $('#object').width( $(window).width() );
+            $('#object').height( $(window).height()-10 );
+
+        })
+
+
+
+
+        $('body').delegate('#object', 'mousemove', function(){
+
+            mesh.rotation.x += 0.01;
+            mesh.rotation.y += 0.01;
+            mesh.rotation.z += 0.01;
+
+            //mesh.position.z += -4;
+
+            mesh.scale.x += -.004;
+            mesh.scale.y += .0005;
+
+        });
+
+
+
+    $(document).on('mousewheel', function(event, delta) {
+
+            if (delta > 0) {
+              mesh.position.z += 50;
+              console.log('+++')
+            } else {
+                mesh.position.z -= 50;
+              console.log('---')
+            }
+
+    });
+
+
+
+
+
+    </script>
+
+
   </body>
 </html>
