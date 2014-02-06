@@ -61,8 +61,11 @@
 
             //mesh.rotation.x += 0.05;
             //mesh.rotation.y += 0.05;
-            mesh.rotation.z += 0.05;
+            mesh.rotation.z += 0.0005;
             //mesh.position.z += 1;
+            mesh.scale.x += .00004;
+            mesh.scale.y -= .00005;
+
 
             renderer.render(scene, camera);
 
@@ -87,8 +90,8 @@
 
             //mesh.position.z += -4;
 
-            mesh.scale.x += -.004;
-            mesh.scale.y += .0005;
+            mesh.scale.x -= .004;
+            mesh.scale.y += .005;
 
         });
 
@@ -97,10 +100,10 @@
     $(document).on('mousewheel', function(event, delta) {
 
             if (delta > 0) {
-              mesh.position.z += 50;
+              mesh.position.z += 100;
               console.log('+++')
             } else {
-                mesh.position.z -= 50;
+                mesh.position.z -= 100;
               console.log('---')
             }
 
