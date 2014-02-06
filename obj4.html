@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      Test
+    </title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    </head>
+  <body>
+
+
+
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/mousewheel.js"></script>
+    <script src="js/three.min.js"></script>
+
+    <script>
+
+    var camera, scene, renderer;
+    var geometry, material, mesh;
+
+
+    init();
+    animate();
+
+    function init() {
+
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+        camera.position.z = 1000;
+
+        scene = new THREE.Scene();
+
+        //geometry = new THREE.CubeGeometry(200, 200, 200);
+
+        geometry = new THREE.OctahedronGeometry(400, 6);
+
+
+        for ( var i = 0; i < geometry.faces.length; i++ ) {
+
+            var hex = Math.random() * 0x222222;
+
+            //console.log(hex)
+
+            geometry.faces[i].color.setHex( hex );
+
+
+            //geometry.faces[ i ][ i + 1 ].color.setHex( hex );
+
+        }
+
+        material = new THREE.MeshBasicMaterial({
+            //color: '#F2A6B7',
+           // wireframe: false,
+           // wireframeLinewidth:2
+
+           vertexColors: THREE.FaceColors, overdraw: 0.5, opacity:0.2
+
+        });
+
+        mesh = new THREE.Mesh(geometry, material);
+        mesh.position.z = 500;
+        scene.add(mesh);
+
+
+        renderer = new THREE.CanvasRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        document.body.appendChild(renderer.domElement);
+
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        mesh.rotation.z += 0.005;
+        //mesh.position.z += 1;
+        mesh.scale.x += .01;
+        mesh.scale.y += .01;
+        // mesh.scale.z += .00000004;
+
+
+
+        // mesh.scale.y -= .0005;
+        // mesh.scale.y -= .0003;
+        renderer.render(scene, camera);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+  </body>
+</html>
