@@ -14,7 +14,7 @@
 
 
     <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+  <!--   // <script src="js/jquery-migrate-1.2.1.min.js"></script> -->
     <script src="js/mousewheel.js"></script>
     <script src="js/three.min.js"></script>
 
@@ -36,14 +36,14 @@
 
         //geometry = new THREE.CubeGeometry(200, 200, 200);
 
-        geometry = new THREE.OctahedronGeometry(400, 6);
+        geometry = new THREE.OctahedronGeometry(400, 5);
 
 
         for ( var i = 0; i < geometry.faces.length; i++ ) {
 
             var hex = Math.random() * 0x222222;
 
-            //console.log(hex)
+            console.log(geometry.faces)
 
             geometry.faces[i].color.setHex( hex );
 
@@ -51,6 +51,9 @@
             //geometry.faces[ i ][ i + 1 ].color.setHex( hex );
 
         }
+
+
+
 
         material = new THREE.MeshBasicMaterial({
             //color: '#F2A6B7',
